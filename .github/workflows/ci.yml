@@ -16,10 +16,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Eigen
+    - name: Set up Deps
       run: |
         sudo apt-get update
-        sudo apt-get install -y libeigen3-dev libyaml-cpp-dev
+        sudo apt-get install -y libeigen3-dev libyaml-cpp-dev libgtest-dev
+    - name: Install Gtest
+      run: |
+        cd /usr/src/gtest
+        sudo cmake .
+        sudo make
+        sudo make install
+        
     - name: Build and test
       run: |
         mkdir build
